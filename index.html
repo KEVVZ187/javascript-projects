@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="items"></p>
+    <input type="text" id="plus">
+    <button onclick="Add()">Aggiungi Testo</button>
+    
+    <input type="text" id="minus">
+    <button onclick="Remove()">Remove</button>
+    <p id="errore"></p>
+    <script>
+        let items = ["Pane", "Latte", "Pasta", "Prova"];
+        for (i=0; i<items.length; i++){
+            document.getElementById("items").innerHTML += items[i] + "<br>";
+        }
+        function Add(){
+            let valore = document.getElementById("plus").value;
+            let plus = items.push(valore);
+            document.getElementById("items").innerHTML += items[items.length - 1] + "<br>";
+            document.getElementById("plus").value = '';
+        }
+        function Remove() {
+            let valore = document.getElementById("minus").value;
+            let pos = items.indexOf(valore);
+            if (pos != -1) {
+            items.splice(pos, 1);
+            console.log(pos);
+            document.getElementById("items").innerHTML = "";
+            for (i=0; i<items.length; i++){
+            document.getElementById("items").innerHTML += items[i] + "<br>";
+            }
+            document.getElementById("minus").value = '';
+            document.getElementById("errore").innerText = "";
+            } else {
+                document.getElementById("errore").innerText = "Non si trova nella lista!";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubrica contatti</title>
+</head>
+<body>
+    <h1>Rubrica contatti</h1>
+    <p id="lista"></p>
+    
+    <button id="btn">Test</button>
+    <button id="btn2">Test2</button>
+    <button id="btn3">Test3</button>
+
+    <h2>Contattore:</h2>
+    <p id="test"></p>
+    
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <script>
+        // OBJECT
+    let contatti = [
+        { nome: "Kevin", numero: "333111222" },
+        { nome: "Marco", numero: "333444555" },
+        { nome: "Anna", numero: "333777888" }
+    ];
+    for (let i=0; i<contatti.length; i++) {
+        document.getElementById("lista").innerHTML += contatti[i].nome + " - " + contatti[i].numero + "<br>";
+    };
+
+    // WHILE
+    let a = 0;
+    while (a<5) {
+        console.log(a);
+        a++;
+    }
+
+    // FUNCTION CON RETURN
+    function somma(x, y) {
+        return x + y;
+    }
+    console.log(somma(5,3));
+
+    // un altro modo di usare "Onclick"
+    document.getElementById("btn").addEventListener("click", saluta);
+    function saluta() {
+        window.alert("Ciao");
+    }
+
+    // Puoi anche non dare un nome nella funziona e stare dentro al AddEventListener
+    document.getElementById("btn2").addEventListener("click", function() {
+        alert("Ciao");
+    });
+
+    // Funzione freccia - scritta piu corta
+    /*
+    () => {
+        alert("Ciao");
+    }
+    */
+
+    document.getElementById("btn3").addEventListener("click", () => {
+        alert("ciao");
+    })
+
+    // setTimeout
+    /*
+    setTimeout(() => {
+        alert("Ciao!");
+    }, 3000);
+
+    setTimeout(() => {
+        alert("Tempo scaduto!");
+    }, 2000)
+
+    */
+
+    // setInterval
+    let timer = setInterval(() => {
+        console.log("Tic!");
+    }, 2000);
+    clearInterval(timer);
+
+    let add = 0; 
+    let plus = setInterval(() => {
+        document.getElementById("test").innerText = add++;
+    }, 1000);
+    clearInterval(plus);
+
+    let numb = 0;
+    let start;
+    document.getElementById("start").addEventListener("click", () => {
+        clearInterval(start);
+        start = setInterval(() => {
+            document.getElementById("test").innerText = numb++;
+            console.log(start);
+        }, 800);
+    });
+    document.getElementById("stop").addEventListener("click", () => {
+        clearInterval(start);
+        console.log(start);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: orange;
+            font-variant: small-caps;
+        }
+        .calc {
+            background: rgb(125, 124, 124);
+            display: flex;
+            justify-content: center;
+            height: 500px;
+            align-items: flex-start;
+            padding: 20px;
+            color: black;
+        }
+
+        .body-calc {
+            background-color: rgb(28, 28, 28);
+            height: 230px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 30px;
+            background: white;
+            border: black solid 3px;
+            border-radius: 15px;
+            padding-right: 10px;
+            width: 350px;
+            height: 35px;
+            text-align: right;
+        }
+        td {
+            background-color: rgb(28, 28, 28);
+            text-align: center;
+            font-size: 30px;
+            color: white;
+            font-size: 30px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            cursor: pointer;
+        }
+        .operazioni {
+            background-color: rgb(255, 181, 45);
+            border-radius: 0px;
+        }
+        .ugual {
+            background-color: rgb(97, 97, 255);
+            border-radius: 0px 0px 20px;
+        }
+        .cancel {
+            background-color: red;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>calcolatrice</h1>
+    <div class="calc">
+        <div class="body-calc">
+            <h2 id="result">0</h2>
+            <table>
+                <tr>
+                    <td id="segno" onclick="ope('+')" class="operazioni">+</td>
+                    <td id="segno" onclick="ope('-')" class="operazioni">-</td>
+                    <td id="segno" onclick="ope('x')" class="operazioni">x</td>
+                    <td id="segno" onclick="ope('/')" class="operazioni">/</td>
+                </tr>
+                <tr>
+                    <td onclick="numb(7)">7</td>
+                    <td onclick="numb(8)">8</td>
+                    <td onclick="numb(9)">9</td>
+                    <td onclick="uguale()" class="ugual" rowspan="4">=</td>
+                </tr>
+                <tr>
+                    <td onclick="numb(4)">4</td>
+                    <td onclick="numb(5)">5</td>
+                    <td onclick="numb(6)">6</td>
+                </tr>
+                <tr>
+                    <td onclick="numb(1)">1</td>
+                    <td onclick="numb(2)">2</td>
+                    <td onclick="numb(3)">3</td>
+                </tr>
+                <tr>
+                    <td onclick="numb(0)">0</td>
+                    <td onclick="numb('.')">.</td>
+                    <td onclick="cancel()" class="cancel">AC</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let numb1 = 0;
+        let numb2 = 0;
+        let oper = "";
+        document.getElementById("result").innerText;
+
+        // OPERAZIONI
+        function ope(operatore) {
+            oper = operatore;            
+            console.log(oper)
+            numb1 = Number(document.getElementById("result").innerText);
+            document.getElementById("result").innerText = "0";
+            console.log(numb1);
+        }
+
+        // NUMERI
+        function numb(n) {
+            if (n === "." && document.getElementById("result").innerText.insicludes(".")) {
+                return;
+            }
+            if (document.getElementById("result").innerText == 0) {
+                document.getElementById("result").innerText = n;
+            } else {
+                document.getElementById("result").innerText += n;
+            }
+        }
+
+        // CANCELLA
+        function cancel() {
+            document.getElementById("result").innerText = 0;
+            numb1 = 0;
+            numb2 = 0;
+            oper = "";
+        }
+
+        // UGUALE
+        function uguale() {
+            numb2 = Number(document.getElementById("result").innerText);
+            console.log(numb2);
+            
+            if (oper === "+") {
+                document.getElementById("result").innerText = numb1 + numb2;
+            } else if (oper === "-") {
+                document.getElementById("result").innerText = numb1 - numb2;
+            } else if (oper === "x") {
+                document.getElementById("result").innerText = numb1 * numb2;
+            } else if (oper === "/") {
+                document.getElementById("result").innerText = numb1 / numb2;
+            }
+        }
+    </script>
+</body>
+</html>
