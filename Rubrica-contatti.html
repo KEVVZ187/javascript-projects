@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubrica di contatti completa</title>
+</head>
+<body>
+    <h1>Rubrica di contatti completa</h1>
+    <table border="1" id="lista">
+        <tr>
+            <td>Nome</td>
+            <td colspan="2"><input type="text" id="user"></td>
+        </tr>
+        <tr>
+            <td>Numero</td>
+            <td colspan="2"><input type="number" id="phone"></td>
+        </tr>
+        <tr align="center">
+            <td><button id="Add">Aggiungi</button></td>
+            <td><button id="Remove">Togli</button></td>
+            <td><button id="Search">Cerca</button></td>
+        </tr>
+        <tr bgcolor="yellow">
+            <td>Elenco</td>
+            <td>Nome</td>
+            <td>Numero di telefono</td>
+        </tr>
+
+    </table>
+    <script>
+        let users = [
+            {Nome: "Kevin", Numero: 3334523743}
+        ]
+        for (i=0; i<users.length; i++){
+            document.getElementById("lista").innerHTML +=
+            "<td>" + i + "</td>" + 
+            "<td>" + users[i].Nome + "</td>" + 
+            "<td>" + users[i].Numero + "</td>"; 
+        }
+        console.log(users);
+
+        // ADD 
+        document.getElementById("Add").addEventListener("click", function() {
+            let user = document.getElementById("user").value;
+            let phone = document.getElementById("phone").value;
+
+            users.push({
+                Nome: user,
+                Numero: phone
+            });
+            console.log(users);
+
+            for (i=1; i<users.length; i++) {
+                document.getElementById("lista").innerHTML += 
+                "<tr>" +
+                    "<td>" + i + "</td>" +
+                    "<td>" + user + "</td>" + 
+                    "<td>" + phone + "</td>" + 
+                "</tr>";
+            console.log(i);
+            }
+        })
+
+    </script>
+</body>
+</html>
