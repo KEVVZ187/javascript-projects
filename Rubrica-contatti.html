@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Rubrica di contatti completa</h1>
-    <table border="1" id="lista">
+    <table border="1">
         <tr>
             <td>Nome</td>
             <td colspan="2"><input type="text" id="user"></td>
@@ -19,7 +19,10 @@
         <tr align="center">
             <td><button id="Add">Aggiungi</button></td>
             <td><button id="Remove">Togli</button></td>
-            <td><button id="Search">Cerca</button></td>
+            <td>
+                <button id="Search">Cerca</button>
+                <button id="Refresh">Refresh Lista</button>
+            </td>
         </tr>
         <tr bgcolor="yellow">
             <td>Elenco</td>
@@ -27,19 +30,31 @@
             <td>Numero di telefono</td>
         </tr>
 
+        <tbody id="lista"></tbody>
     </table>
     <script>
         let users = [
-            {Nome: "Kevin", Numero: 3334523743}
-        ]
+            {Nome: "Kevin", Numero: 3334523743},
+            {Nome: "a", Numero: 1},
+            {Nome: "b", Numero: 2},
+            {Nome: "c", Numero: 3},
+            {Nome: "d", Numero: 4},
+        ];
+        console.log(users);
         for (i=0; i<users.length; i++){
             document.getElementById("lista").innerHTML +=
             "<td>" + i + "</td>" + 
             "<td>" + users[i].Nome + "</td>" + 
-            "<td>" + users[i].Numero + "</td>"; 
+            "<td>" + users[i].Numero + "</td>";
+            console.log(i + " Posizione " + users[i].Nome);
         }
-        console.log(users);
 
+        // NOTA FUTURA: il codice che rigenera la lista (svuota + for) 
+        // appare più volte in Add, Remove e Refresh.
+        // Quando vuoi migliorare questo progetto, prova a spostarlo 
+        // tutto dentro updateList() e richiamare solo quella.
+        // Si chiama principio DRY — Don't Repeat Yourself.
+        
         // ADD 
         document.getElementById("Add").addEventListener("click", function() {
             let user = document.getElementById("user").value;
@@ -49,19 +64,80 @@
                 Nome: user,
                 Numero: phone
             });
-            console.log(users);
-
-            for (i=1; i<users.length; i++) {
-                document.getElementById("lista").innerHTML += 
-                "<tr>" +
-                    "<td>" + i + "</td>" +
-                    "<td>" + user + "</td>" + 
-                    "<td>" + phone + "</td>" + 
-                "</tr>";
+            document.getElementById("lista").innerHTML += 
+            "<tr>" +
+                "<td>" + i + "</td>" +
+                "<td>" + user + "</td>" + 
+                "<td>" + phone + "</td>" + 
+            "</tr>";
+            i++;
             console.log(i);
+        })
+
+        // REMOVE 
+        document.getElementById("Remove").addEventListener("click", function(){
+            let user = document.getElementById("user").value;
+            let phone = document.getElementById("phone").value;
+            let pos = -1;
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].Nome === user) {
+                    pos = i;
+                }
+            }
+            console.log(pos + " Posizione remove");
+            if (pos != -1) {
+                users.splice(pos, 1);
+                console.log(users);
+                document.getElementById("lista").innerHTML = "";
+                for (i=0; i<users.length; i++){
+                    document.getElementById("lista").innerHTML +=
+                    "<td>" + i + "</td>" + 
+                    "<td>" + users[i].Nome + "</td>" + 
+                    "<td>" + users[i].Numero + "</td>";
+                    console.log(i + " Posizione " + users[i].Nome);
+                }
+                i--;
+                console.log(i);
+                } else {
+                window.alert("Non si trova nella rubrica");
             }
         })
 
+        // Search
+        document.getElementById("Search").addEventListener("click", function(){
+            let user = document.getElementById("user").value;
+            let phone = document.getElementById("phone").value;
+            let pos = -1;
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].Nome === user) {
+                    pos = i;
+                }
+            }
+            if (pos != -1) {
+                console.log(pos + " Posizione");
+                for (i=0; i<users.length; i++) {
+                    document.getElementById("lista").innerHTML = 
+                        "<td>" + pos + "</td>" +
+                        "<td>" + users[pos].Nome + "</td>" + 
+                        "<td>" + users[pos].Numero + "</td>";
+                    
+                }
+                } else {
+                window.alert("Non si trova nella rubrica");
+            }
+        });
+
+        // Refresh
+        document.getElementById("Refresh").addEventListener("click", function(){
+            document.getElementById("lista").innerHTML = "";
+            for (i=0; i<users.length; i++){
+            document.getElementById("lista").innerHTML +=
+            "<td>" + i + "</td>" + 
+            "<td>" + users[i].Nome + "</td>" + 
+            "<td>" + users[i].Numero + "</td>";
+            console.log(i + " Posizione " + users[i].Nome);
+            }
+        });
     </script>
 </body>
 </html>
