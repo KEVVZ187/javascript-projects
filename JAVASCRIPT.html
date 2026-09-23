@@ -6,15 +6,34 @@
     <title>HTML - CSS - JAVASCRIPT</title>
 </head>
 <body>
-    <h1 id="test"></h1>
-
+    <h1 id="user"></h1>
+    <button id="Add">New User</button>
     <script>
-        document.getElementById("test").innerText = "Daniel busness mannnnn!"
-        let style = document.getElementById("test").style;
-        style.color = "Red";
-        style.fontFamily = "Verdana";
-        style.textAlign = "Center";
-        style.fontSize = "50px";
+        // TRY CATCH
+        try {
+            let testo = null;
+            let risultato = testo.toUpperCase();
+            console.log(risultato);
+        } catch (error) {
+            console.log("Errore: " + error.message);
+        }
+        function Connect() {
+            fetch("https://randomuser.me/api/")
+            .then(risposta => risposta.json())
+            .then(dati => {
+                console.log(dati);
+                console.log(dati.results[0].name.first + " " + dati.results[0].name.last);
+                document.getElementById("user").innerText = dati.results[0].name.first + " " + dati.results[0].name.last;
+            })
+            .catch(error => {
+                console.log("Errore:" + error.message);
+            }) 
+        }
+        Connect();
+
+        document.getElementById("Add").addEventListener("click", function () {
+            Connect();
+        })
     </script>
 </body>
 </html>
