@@ -28,14 +28,14 @@
             let valore = document.getElementById("minus").value;
             let pos = items.indexOf(valore);
             if (pos != -1) {
-            items.splice(pos, 1);
-            console.log(pos);
-            document.getElementById("items").innerHTML = "";
-            for (i=0; i<items.length; i++){
-            document.getElementById("items").innerHTML += items[i] + "<br>";
-            }
-            document.getElementById("minus").value = '';
-            document.getElementById("errore").innerText = "";
+                items.splice(pos, 1);
+                console.log(pos);
+                document.getElementById("items").innerHTML = "";
+                for (i=0; i<items.length; i++){
+                document.getElementById("items").innerHTML += items[i] + "<br>";
+                }
+                document.getElementById("minus").value = '';
+                document.getElementById("errore").innerText = "";
             } else {
                 document.getElementById("errore").innerText = "Non si trova nella lista!";
             }

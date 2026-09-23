@@ -40,7 +40,27 @@
             {Nome: "c", Numero: 3},
             {Nome: "d", Numero: 4},
         ];
+
+        // NOTA FUTURA: il codice che rigenera la lista (svuota + for) 
+        // appare più volte in Add, Remove e Refresh.
+        // Quando vuoi migliorare questo progetto, prova a spostarlo 
+        // tutto dentro updateList() e richiamare solo quella.
+        // Si chiama principio DRY — Don't Repeat Yourself.
+
+        // NUOVO CODICE
+        function updateList() {
+            document.getElementById("lista").innerHTML = "";
+            for (i=0; i<users.length; i++){
+                document.getElementById("lista").innerHTML +=
+                "<td>" + i + "</td>" + 
+                "<td>" + users[i].Nome + "</td>" + 
+                "<td>" + users[i].Numero + "</td>";
+            }
+        }
+        updateList();
+
         console.log(users);
+        /* IL MIO CODICE
         for (i=0; i<users.length; i++){
             document.getElementById("lista").innerHTML +=
             "<td>" + i + "</td>" + 
@@ -48,12 +68,7 @@
             "<td>" + users[i].Numero + "</td>";
             console.log(i + " Posizione " + users[i].Nome);
         }
-
-        // NOTA FUTURA: il codice che rigenera la lista (svuota + for) 
-        // appare più volte in Add, Remove e Refresh.
-        // Quando vuoi migliorare questo progetto, prova a spostarlo 
-        // tutto dentro updateList() e richiamare solo quella.
-        // Si chiama principio DRY — Don't Repeat Yourself.
+        */
         
         // ADD 
         document.getElementById("Add").addEventListener("click", function() {
@@ -64,12 +79,16 @@
                 Nome: user,
                 Numero: phone
             });
+            /* MIO CODICE
             document.getElementById("lista").innerHTML += 
             "<tr>" +
                 "<td>" + i + "</td>" +
                 "<td>" + user + "</td>" + 
                 "<td>" + phone + "</td>" + 
             "</tr>";
+            */
+            // NUOVO CODICE
+            updateList();
             i++;
             console.log(i);
         })
@@ -84,10 +103,10 @@
                     pos = i;
                 }
             }
-            console.log(pos + " Posizione remove");
             if (pos != -1) {
                 users.splice(pos, 1);
                 console.log(users);
+                /* MIO CODICE
                 document.getElementById("lista").innerHTML = "";
                 for (i=0; i<users.length; i++){
                     document.getElementById("lista").innerHTML +=
@@ -96,8 +115,10 @@
                     "<td>" + users[i].Numero + "</td>";
                     console.log(i + " Posizione " + users[i].Nome);
                 }
+                */
+                // NUOVO CODICE
+                updateList();
                 i--;
-                console.log(i);
                 } else {
                 window.alert("Non si trova nella rubrica");
             }
@@ -129,14 +150,16 @@
 
         // Refresh
         document.getElementById("Refresh").addEventListener("click", function(){
+            /* IL MIO CODICE
             document.getElementById("lista").innerHTML = "";
             for (i=0; i<users.length; i++){
             document.getElementById("lista").innerHTML +=
             "<td>" + i + "</td>" + 
             "<td>" + users[i].Nome + "</td>" + 
             "<td>" + users[i].Numero + "</td>";
-            console.log(i + " Posizione " + users[i].Nome);
             }
+            */
+           updateList();
         });
     </script>
 </body>
