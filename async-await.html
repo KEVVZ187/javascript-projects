@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async/awwait</title>
+</head>
+<body>
+
+
+    <script>
+
+/* Fetch() e then() un po' scomodo da leggere quando ci sono tante operazioni in sequenza.
+fetch("https://randomuser.me/api/")
+    .then(risposta => risposta.json())
+    .then(dati => console.log(dati));
+*/
+        async function getUser() {
+            try {
+                let risposta = await fetch("https://randomuser.me/api/");
+                let dati = await risposta.json();
+                console.log(dati);
+            } catch(error) {
+                console.log("Errore: " + error.message);
+            };
+        }
+        getUser();
+
+    </script>
+</body>
+</html>
