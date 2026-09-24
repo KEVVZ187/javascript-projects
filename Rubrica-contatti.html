@@ -47,6 +47,14 @@
         // tutto dentro updateList() e richiamare solo quella.
         // Si chiama principio DRY — Don't Repeat Yourself.
 
+
+        // NUOVO ARGOMENTO E CODICE
+        if (localStorage.getItem("users") !== null) {
+            users = JSON.parse(localStorage.getItem("users"));
+        } else {
+            
+        }
+
         // NUOVO CODICE
         function updateList() {
             document.getElementById("lista").innerHTML = "";
@@ -90,7 +98,8 @@
             // NUOVO CODICE
             updateList();
             i++;
-            console.log(i);
+            localStorage.setItem("users", JSON.stringify(users));
+            console.log(users);
         })
 
         // REMOVE 
@@ -119,6 +128,7 @@
                 // NUOVO CODICE
                 updateList();
                 i--;
+                localStorage.setItem("users", JSON.stringify(users));
                 } else {
                 window.alert("Non si trova nella rubrica");
             }
@@ -161,6 +171,19 @@
             */
            updateList();
         });
+
+
+        // NUOVA PARTE - 23/09 - 15:42
+        //localStorage.setItem("nome", "Kevin"); // SALVA
+        //localStorage.getItem("chiave"); // LEGGE
+        //localStorage.removeItem("chiave"); // CANCELLA
+        
+        // (PERCHé NON PUOI SALVARE LA STRINGRA DIRETTAMENTE QUINDI SI CONVERTE PER ARRAY O OBJECT)
+        // SALVA
+        //localStorage.setItem("users", JSON.stringify(users));
+        // LEGGI
+        //let salvati = JSON.parse(localStorage.getItem("users"));
+
     </script>
 </body>
 </html>
