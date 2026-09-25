@@ -184,6 +184,21 @@
         // LEGGI
         //let salvati = JSON.parse(localStorage.getItem("users"));
 
+
+        // CLASSE 
+        class Contatto {
+            constructor(nome, numero) {
+                this.nome = nome;
+                this.numero = numero;
+            }
+            mostra() {
+                console.log("Nome: " + this.nome + " - Numero: " + this.numero);
+            }
+        }
+        let luca = new Contatto("Luca", 3132872);
+        luca.mostra();
+
+        
     </script>
 </body>
 </html>
