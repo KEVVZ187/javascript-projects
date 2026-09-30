@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back tick</title>
+</head>
+<body>
+    <h1>Prermere ALT + 96 per fare `${Variabile}` per far funzionare dentro una stringa senza usare + </h1>
+    <p id="p"></p>
+    <h1 id="rs"></h1>
+    <script>
+        document.getElementById("p").textContent = "Ciao!";
+        const rs = "Bomboclat";
+        document.getElementById("rs").textContent = `${rs}`;
+
+        let user;
+        user = window.prompt("Quale il tuo nome?");
+        console.log(user);
+    </script>
+</body>
+</html>
