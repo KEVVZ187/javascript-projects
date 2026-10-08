@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial; 
+            margin: 20px; 
+            display: flex;
+            flex-direction: column;
+            justify-self: center;
+            align-items: center;
+            width: auto;
+        }
+
+        /*HEAD*/
+        #headWeather {
+            /*
+            background-color: rgb(66, 101, 255); -- CLEAR
+            background-color: rgb(97, 90, 111); -- CLOUDS
+            background-color: rgb(60, 139, 96); -- SNOW
+            */
+            background-color: rgb(255, 175, 45); /* DEFAULT */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 35%;
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            color: white;
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            border: 4px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            
+        }
+        #headWeather h1{
+            color: black;
+            background: white;
+            border: solid 3px black;
+            border-radius: 18px;
+            width: 100%;
+            margin-bottom: 18px
+        }
+        #headWeather input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 18px;
+            border: 0;
+            height: 28px;
+            outline: none;
+            margin-bottom: 18px;
+        }
+        #headWeather button {
+            background-color: rgb(8, 0, 255);
+            border-radius: 18px;
+            padding: 3.5px;
+            border: aqua 4px solid;
+            width: 100%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: aqua;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            
+        }
+        #headWeather button:hover {
+            background-color: white;
+            color: rgb(8, 0, 255);;
+        }
+
+        /*RESULT WEATHER*/
+        #weatherResult {
+            margin: 18px 0px;
+            width: 100%;
+        }
+        #weatherResult span{font-size: 3rem;}
+        #weatherResult h2 {color: black;}
+        #saveBtn{display: none;}
+
+        #savedCities {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #Citysave {
+            background-color: rgb(255, 175, 45); /* DEFAULT */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 25%;
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            color: white;
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            border: 4px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            margin: 10px;
+        }
+        #Citysave span {font-size: 3rem;}
+
+        #removeBtn {
+            background-color: rgb(193, 5, 5);
+            border-radius: 18px;
+            padding: 3.5px;
+            border: red 4px solid;
+            margin-top: 10px;
+            width: 20%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: red;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <!--
+    
+
+Cosa fa:
+
+Cerchi una città e mostra il meteo
+Salva le città preferite in localStorage
+Lista di città salvate
+Cancella città dalla lista
+
+Concetti che ripassa:
+
+fetch() + API (openweathermap)
+async/await
+try/catch
+localStorage (salva/carica città)
+addEventListener (bottoni)
+DOM manipulation (classList, innerHTML)
+Dati in tempo reale
+    -->
+    <div id="headWeather">
+        <h1>WEATHER APP</h1>
+        <input type="text" id="cityInput" placeholder="Scrivi una città">
+        <button id="searchBtn">CERCA</button>
+        <div id="weatherResult">
+
+        </div>
+        <button id="saveBtn">SALVA</button>
+    </div>
+
+
+    <div id="footWeather">
+        <h2>Città salvate:</h2>
+        <ul id="savedCities">
+
+            <div id="Citysave">
+                <span>☁️</span>
+                <h2>Milan</h2>
+                <p>Temperatura: 17.57°C</p>
+                <p>Meteo: Rain</p>
+                <p>Umidità: 92%</p>
+                <button id="removeBtn">X</button>
+            </div>
+
+
+                        <div id="Citysave">
+                <span>☁️</span>
+                <h2>Milan</h2>
+                <p>Temperatura: 17.57°C</p>
+                <p>Meteo: Rain</p>
+                <p>Umidità: 92%</p>
+                <button id="removeBtn">X</button>
+            </div>
+
+                        <div id="Citysave">
+                <span>☁️</span>
+                <h2>Milan</h2>
+                <p>Temperatura: 17.57°C</p>
+                <p>Meteo: Rain</p>
+                <p>Umidità: 92%</p>
+                <button id="removeBtn">X</button>
+            </div>
+
+                        <div id="Citysave">
+                <span>☁️</span>
+                <h2>Milan</h2>
+                <p>Temperatura: 17.57°C</p>
+                <p>Meteo: Rain</p>
+                <p>Umidità: 92%</p>
+                <button id="removeBtn">X</button>
+            </div>
+        </ul>
+    </div>
+    <script>
+    document.getElementById("searchBtn").addEventListener("click", function() {
+        const APIkey = "9af237c63a569fff3554b7a1c0e4e710";
+        const citta = document.getElementById("cityInput").value;
+        try {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citta}&appid=${APIkey}&units=metric`)
+            .then(risposta => risposta.json())
+            .then(dati => {
+                console.log(dati);
+
+                // ESTRAI I DATI
+                let temp = dati.main.temp;
+                let descrizione = dati.weather[0].main;
+                let umidita = dati.main.humidity;
+                let citta = dati.name;
+                let backColor = document.getElementById("headWeather");
+                // FUNZIONE PER STAMPARE IN HTML I DATI
+                function SKY() {
+                    document.getElementById("weatherResult").innerHTML = 
+                        `
+                            <span>${sky}</span>
+                            <h2>${citta}</h2>
+                            <p>Temperatura: ${temp}°C</p>
+                            <p>Meteo: ${descrizione}</p>
+                            <p>Umidità: ${umidita}%</p>
+                        `;
+                }
+
+                // FUNZIONE PER FAR APPARIRE IL BUTTON PER SALVARE LA CITTA
+                function appearBtn() {
+                    document.getElementById("saveBtn").style.display = "inline";
+                }
+
+
+                // IF PER VEDERE IL TIPO DI CLIMA
+                if (descrizione == "Clouds") {
+                    sky = "☁️";
+                    backColor.style.backgroundColor = "rgb(97, 90, 111)";
+                    SKY();
+                    appearBtn();
+                } else if(descrizione == "Clear") {
+                    sky = "☀️";
+                    backColor.style.backgroundColor = "rgb(66, 101, 255)";
+                    SKY();
+                    appearBtn();
+                } else if (descrizione == "Snow") {
+                    sky = "🌨️";
+                    backColor.style.backgroundColor = "rgb(60, 139, 96)";
+                } else if (descrizione == "Rain") {
+                    sky = "🌧️";
+                    backColor.style.backgroundColor = "rgb(97, 90, 111)";
+                    SKY();
+                    appearBtn();
+                }
+
+                // FUNZIONE PER SALVARE LA CITTA NELLA LISTA DEI PREFERITI
+                let savedCities = [
+                    {   
+                        Sky: "",
+                        Citta: "",
+                        Temperatira: "",
+                        Meteo: "",
+                        Umidità: ""
+                    }
+                ];
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            })
+        } catch (error) {
+            console.log("Errore: " + error.message);
+        }
+    })
+
+    </script>
+</body>
+</html>
